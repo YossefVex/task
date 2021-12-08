@@ -1,28 +1,90 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <tree :tree-data="tree"></tree>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Tree from "./Tree";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Tree,
+  },
+  data() {
+    return {
+      tree: {
+        label: "A cool folder",
+        children: [
+          {
+            label: "A cool sub-folder 1",
+            children: [
+              {
+                label: "A cool sub-sub-folder 1",
+                children: [
+                  {
+                    label: "A cool sub-folder 1",
+                    children: [
+                      {
+                        label: "A cool sub-sub-folder 1",
+                        children: [
+                          {
+                            label: "A cool sub-folder 1",
+                            children: [
+                              { label: "A cool sub-sub-folder 1" },
+                              { label: "A cool sub-sub-folder 2" },
+                            ],
+                          },
+                          { label: "This one is not that cool" },
+                        ],
+                      },
+                      { label: "A cool sub-sub-folder 2" },
+                    ],
+                  },
+                  { label: "This one is not that cool" },
+                ],
+              },
+              { label: "A cool sub-sub-folder 2" },
+            ],
+          },
+          { label: "This one is not that cool" },
+        ],
+      },
+    };
+  },
+};
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+li {
+ display: block;
+ transition-duration: 0.5s;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+ul li ul {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+  left: 0;
+  display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
 }
 </style>
